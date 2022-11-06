@@ -13,6 +13,7 @@ class Users extends BaseController
     {
         $this->userModel = new UserModel();
     }
+
     public function index()
     {
         return view('users', ['users' =>  $this->userModel->findAll()]);

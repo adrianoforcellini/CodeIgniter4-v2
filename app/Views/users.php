@@ -50,7 +50,6 @@
                     <td><?php echo $user['email'] ?></td>
                     <td > <?php echo anchor('users/edit/' . $user['id'], 'Editar', 'class="btn btn-secondary btn-sm"') ?>
                         <?php echo anchor('users/delete/' . $user['id'], 'Excluir', ['onclick' => 'return sureToDelete()', 'class'  =>  "btn btn-secondary btn-sm"]) ?></td>
-
                 </tr>
             <?php endforeach ?>
         </table>

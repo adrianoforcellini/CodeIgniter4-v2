@@ -35,6 +35,8 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+$routes->addRedirect('/', '/users');
+
 // $routes->get('/', 'Home::index');
 // $routes->get('/users/delete/(:id)', 'UserController::delete(:id)');
 // $routes->get('/users', 'UserController::index');
