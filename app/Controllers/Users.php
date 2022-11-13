@@ -45,4 +45,13 @@ class Users extends BaseController
     {
         return view('form', ['user' => $this->userModel->find($id)]);
     }
+
+    public function insert()
+    {
+        if ($this->userModel->save($_POST)) {
+            echo "Usuário Salvo";
+        } else {
+            echo "Houve alguma falha ao tentar salvar usuário";
+        }
+    }
 }

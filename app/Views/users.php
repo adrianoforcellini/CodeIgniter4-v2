@@ -30,32 +30,32 @@
                     <div class="modal-body">
                         <div class="container">
                             <?php echo form_open('users/store') ?>
-                                <div class="form-group">
-                                    <label for="name" class="col-sm-2 col-form-label">Nome</label>
-                                    <div class="col-sm-10">
-                                        <input type=text class=form-control name=name id=name value="<?php echo isset($user) ? $user['name'] : "" ?>">
-                                    </div>
+                            <div class="form-group">
+                                <label for="name" class="col-sm-2 col-form-label">Nome</label>
+                                <div class="col-sm-10">
+                                    <input type=text class=form-control name=name id=name value="<?php echo isset($user) ? $user['name'] : "" ?>">
                                 </div>
-                                <div class="form-group  ">
-                                    <label for="username" class="col-sm-2 col-form-label">Username</label>
-                                    <div class="col-sm-10">
-                                        <input type=text class=form-control name=username id=username value="<?php echo isset($user) ? $user['username'] : "" ?>">
-                                    </div>
+                            </div>
+                            <div class="form-group  ">
+                                <label for="username" class="col-sm-2 col-form-label">Username</label>
+                                <div class="col-sm-10">
+                                    <input type=text class=form-control name=username id=username value="<?php echo isset($user) ? $user['username'] : "" ?>">
                                 </div>
-                                <div class="form-group  ">
-                                    <label for="lastname" class="col-sm-2 col-form-label">Sobrenome</label>
-                                    <div class="col-sm-10">
-                                        <input type=text class=form-control name=lastname id=lastname value="<?php echo isset($user) ? $user['lastname'] : "" ?>">
-                                    </div>
+                            </div>
+                            <div class="form-group  ">
+                                <label for="lastname" class="col-sm-2 col-form-label">Sobrenome</label>
+                                <div class="col-sm-10">
+                                    <input type=text class=form-control name=lastname id=lastname value="<?php echo isset($user) ? $user['lastname'] : "" ?>">
                                 </div>
-                                <div class="form-group  ">
-                                    <label for="email" class="col-sm-2 col-form-label">Email</label>
-                                    <div class="col-sm-10">
-                                        <input type=text class=form-control name=email id=email value="<?php echo isset($user) ? $user['email'] : "" ?>">
-                                    </div>
+                            </div>
+                            <div class="form-group  ">
+                                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type=text class=form-control name=email id=email value="<?php echo isset($user) ? $user['email'] : "" ?>">
                                 </div>
-                                <input type="submit" value="Salvar" class="btn btn-secondary mt-5">
-                                <input type="hidden" name="id" value="<?php echo isset($user) ? $user['id'] : "" ?>">
+                            </div>
+                            <input type="submit" value="Salvar" class="btn btn-secondary mt-5">
+                            <input type="hidden" name="id" value="<?php echo isset($user) ? $user['id'] : "" ?>">
                             <?php echo form_close(); ?>
                         </div>
                     </div>
@@ -106,16 +106,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-             <script>
-                function addUser() {
-                    const name = $('#name').val()
-                    const username = $('#username').val()
-                    const lastname = $('#lastname').val()
-                    const email = $('#email').val()
+    <script>
+        function addUser() {
+            const name = $('#name').val()
+            const username = $('#username').val()
+            const lastname = $('#lastname').val()
+            const email = $('#email').val()
 
-                    $.ajax({})
+            
+
+            $.ajax({
+                url: "<?php echo base_url(); ?>/users/insert",
+                type: 'post',
+                data: {
+                    name: name,
+                    username: username,
+                    lastname: lastname,
+                    email: email
+                },
+                success: function(data, status) {
+                    console.log(status)
+                    console.log(data)
                 }
-             </script>   
+            })
+        }
+    </script>
 
 </body>
 
