@@ -19,31 +19,19 @@ class Users extends BaseController
         return view('users', ['users' =>  $this->userModel->findAll()]);
     }
 
-    public function delete($id)
+    public function delete()
     {
-        if ($this->userModel->delete($id)) {
-            return view('users', ['users' =>  $this->userModel->findAll()]);
-        } else {
-            echo "Houve algum erro. Tente novamente";
-        }
+        $this->userModel->delete($_POST['id']);
     }
 
 
 
     public function insert()
     {
-        if ($this->userModel->save($_POST)) {
-            echo "Usuário Salvo";
-        } else {
-            echo "Houve alguma falha ao tentar salvar usuário";
-        }
+        $this->userModel->save($_POST);
     }
     public function edit()
     {
-        if ($this->userModel->update($_POST['id'],$_POST['editUser'])) {
-            echo "Usuário Salvo";
-        } else {
-            echo "Houve alguma falha ao tentar salvar usuário";
-        }
+        $this->userModel->update($_POST['id'], $_POST['editUser']);
     }
 }

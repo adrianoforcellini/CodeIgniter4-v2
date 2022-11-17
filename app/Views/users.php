@@ -100,7 +100,28 @@
             </div>
         </div>
         <!-- end Edit Modal -->
-
+        <!-- Delete User Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Deletar Usuário</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <p>Tem certeza que deseja excluir o usuário?</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="deleteId" value="">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="deleteUser()">Excluir Usuário</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end Delete Modal -->
         <?php echo anchor(base_url('users/create'), 'Novo Usuário', ['data-bs-toggle' => 'modal', 'data-bs-target' => "#addUserModal", 'class'  =>  "btn btn-secondary mb-5"]); ?>
         <table class="table  table-responsive">
             <tr>
@@ -131,7 +152,7 @@
                     <td><?php echo $user['lastname'] ?></td>
                     <td><?php echo $user['email'] ?></td>
                     <td> <?php echo anchor('users/edit/' . $user['id'], 'Editar', ['onclick' => 'return populateUpdateUserModal(' . $user['id'] . ',"' . $user['name'] . '","' . $user['username'] . '","' . $user['lastname'] . '","' . $user['email'] . '" )', 'data-bs-toggle' => 'modal', 'data-bs-target' => "#editUserModal", 'class'  =>  "btn btn-secondary btn-sm"]) ?>
-                        <?php echo anchor('users/delete/' . $user['id'], 'Excluir', ['onclick' => 'return sureToDelete(' . $user['id'] . ')', 'class'  =>  "btn btn-secondary btn-sm"]) ?></td>
+                        <?php echo anchor('users/delete/' . $user['id'], 'Excluir', ['onclick' => 'return populateDeleteModal(' . $user['id'] . ')', 'class'  =>  "btn btn-secondary btn-sm",  'data-bs-toggle' => 'modal', 'data-bs-target' => "#deleteModal"]) ?></td>
 
                 </tr>
             <?php endforeach ?>
@@ -187,13 +208,17 @@
                         },
                     }
                 })
-                .then(document.location.reload())
+                .then(document.location.reload());
         }
 
-        function sureToDelete(id) {
-            if (!confirm("Deseja exluir o registro?")) {
-                return false
-            }
+        function populateDeleteModal(id) {
+            $('#deleteId').val(id)
+
+        }
+
+        function deleteUser() {
+            const id = $('#deleteId').val();
+            console.log(id)
             $.ajax({
                     url: "<?php echo base_url(); ?>/users/delete",
                     type: 'post',
