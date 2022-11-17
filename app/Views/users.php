@@ -123,7 +123,7 @@
         </div>
         <!-- end Delete Modal -->
         <?php echo anchor(base_url('users/create'), 'Novo Usuário', ['data-bs-toggle' => 'modal', 'data-bs-target' => "#addUserModal", 'class'  =>  "btn btn-secondary mb-5"]); ?>
-        <table class="table  table-responsive">
+        <table sortable=false class="table  table-responsive">
             <tr>
                 <th>
                     ID
@@ -218,7 +218,6 @@
 
         function deleteUser() {
             const id = $('#deleteId').val();
-            console.log(id)
             $.ajax({
                     url: "<?php echo base_url(); ?>/users/delete",
                     type: 'post',
