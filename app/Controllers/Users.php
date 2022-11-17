@@ -22,33 +22,25 @@ class Users extends BaseController
     public function delete($id)
     {
         if ($this->userModel->delete($id)) {
-            echo view('messages', ['message' => 'Usuário Excluído com Sucesso!']);
+            return view('users', ['users' =>  $this->userModel->findAll()]);
         } else {
-            echo view('messages', ['message' => 'Erro Na Exclusão.']);
-        }
-    }
-    public function create()
-    {
-        return view('form');
-    }
-
-    public function store()
-    {
-        if ($this->userModel->save($this->request->getPost())) {
-            return view("messages", ['message' => 'Usuário Salvo com Sucesso']);
-        } else {
-            echo 'Ocorreu um erro.';
+            echo "Houve algum erro. Tente novamente";
         }
     }
 
-    public function edit($id)
-    {
-        return view('form', ['user' => $this->userModel->find($id)]);
-    }
+
 
     public function insert()
     {
         if ($this->userModel->save($_POST)) {
+            echo "Usuário Salvo";
+        } else {
+            echo "Houve alguma falha ao tentar salvar usuário";
+        }
+    }
+    public function edit()
+    {
+        if ($this->userModel->update($_POST['id'],$_POST['editUser'])) {
             echo "Usuário Salvo";
         } else {
             echo "Houve alguma falha ao tentar salvar usuário";
