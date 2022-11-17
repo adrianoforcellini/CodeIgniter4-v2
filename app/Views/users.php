@@ -168,7 +168,7 @@
             const lastname = $('#lastname').val()
             const email = $('#email').val()
             $.ajax({
-                    url: "<?php echo base_url(); ?>/users/insert",
+                    url: "<?php echo base_url(); ?>/users/create",
                     type: 'post',
                     data: {
                         name,

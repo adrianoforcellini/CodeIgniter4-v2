@@ -24,9 +24,7 @@ class Users extends BaseController
         $this->userModel->delete($_POST['id']);
     }
 
-
-
-    public function insert()
+    public function create()
     {
         $this->userModel->save($_POST);
     }
